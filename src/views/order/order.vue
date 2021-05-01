@@ -187,6 +187,7 @@
       for (var s of this.multipleSelection) {
         array += s.orderId + ',';
       }
+      //console.log(array)
       batchDelOrder(array).then((res) => {
         if (res.code === 1000) {
           this.$message({

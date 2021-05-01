@@ -46,7 +46,7 @@
       <el-table-column
         label="折扣">
         <template slot-scope="scope">
-          <el-tag type="primary">{{ scope.row.roomDiscount + '%' }}</el-tag>
+          <el-tag type="primary">{{ scope.row.roomDiscount + '折' }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column

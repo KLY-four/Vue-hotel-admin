@@ -60,4 +60,12 @@ export function delUser(id) {
     }
   })
 }
-
+export function batchDelUser(data) {
+  return request({
+    url: URL + '/batchDelete',
+    method: 'post',
+    data: {
+      data: data
+    }
+  })
+}

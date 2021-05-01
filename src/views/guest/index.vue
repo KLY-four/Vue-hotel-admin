@@ -88,7 +88,7 @@
       </el-pagination>
       <div class="bottom">
         <el-button type="primary" @click="navigateTo('add')">添加客户</el-button>
-        <el-button type="danger" @click="massDeletion">批量删除</el-button>
+        <el-button type="danger" @click="massDeletion" >批量删除</el-button>
 
       </div>
 
@@ -98,7 +98,7 @@
 </template>
 
 <script>
-  import {delUser, getAllUser,getByPhone} from "../../api/user";
+  import {delUser, getAllUser,getByPhone,batchDelUser} from "../../api/user";
 
   export default {
         name: "Guest",
@@ -110,7 +110,7 @@
           visible2: false,
           loading: null,
           listLoading: false,
-          multipleSelection: null,
+          multipleSelection: [],
           phone:''
         }
       },
@@ -155,7 +155,35 @@
           this.$router.push("/user/"+val)
         },
         massDeletion() {
+
+          if (this.multipleSelection.length ==0) {
+            return
+          }
+          var array = '';
+          for (var s of this.multipleSelection) {
+            array += s.userId + ',';
+          }
+          console.log(array)
+          batchDelUser(array).then((res) => {
+            if (res.code === 1000) {
+              this.$message({
+                message: '删除成功！',
+                type: 'success'
+              })
+              this.list.push();
+              this.fetchData()
+            } else {
+              this.$message({
+                message: '删除失败！',
+                type: 'error'
+              })
+            }
+          }).catch((res) => {
+            this.$toast.error(res)
+          })
+          this.fetchData()
         },
+
         handleDel(row){
           row.visible2 = false
           row.loading = true
@@ -167,6 +195,7 @@
                 message: '删除成功！',
                 type: 'success'
               })
+              this.fetchData()
             } else {
               this.$message({
                 message: '删除失败！',
@@ -195,8 +224,9 @@
             this.$refs.multipleTable.clearSelection()
           }
         },
-        handleSelectionChange(){
+        handleSelectionChange(val){
           this.multipleSelection = val
+          console.log(this.multipleSelection)
         },
       },
     }

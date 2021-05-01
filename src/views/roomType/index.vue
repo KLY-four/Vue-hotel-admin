@@ -31,15 +31,28 @@
       </el-table-column>
       <el-table-column
         prop="price"
-        label="预定价格"/>
+        label="预定价格">
+        <template slot-scope="scope">
+          <span>{{ scope.row.price }} 元</span>
+        </template>
+      </el-table-column>
 
       <el-table-column
         prop="rest"
-        label="空余房间"/>
+        label="空余房间">
+        <template slot-scope="scope">
+          <span>{{ scope.row.rest }} 间</span>
+        </template>
+      </el-table-column>
+
 
       <el-table-column
         prop="discount"
-        label="预定折扣"/>
+        label="预定折扣">
+        <template slot-scope="scope">
+          <span>{{ scope.row.discount }} 折</span>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="area"
         label="房间面积">

@@ -10,7 +10,7 @@
         ]"
         prop="roomType"
         label="房间类型名称">
-        <el-input v-model="form1.roomType" placeholder="请输入房间类型名"/>
+        <el-input v-model="form1.roomType" placeholder="房间类型"/>
       </el-form-item>
       <el-form-item
         :rules="[
@@ -20,7 +20,7 @@
         label="预定价格"
         prop="price"
       >
-        <el-input v-model.number="form1.price" type="number" placeholder="单位：元"/>
+        <el-input v-model.number="form1.price" type="number" :min='0' @blur="form1.price<0?form1.price=0:''" placeholder="单位：元"/>
       </el-form-item>
       <el-form-item
         :rules="[
@@ -30,17 +30,13 @@
         label="预定折扣"
         prop="discount"
       >
-        <el-input v-model.number="form1.discount" type="number" placeholder="0-100%"/>
+        <el-input v-model.number="form1.discount" type="number" :min="1" :max="10" @blur="form1.discount<1?form1.discount=1:(form1.discount>10?form1.discount=10:'')" placeholder="1-10折,小于1折默认为1折，大于10折默认为10折"/>
       </el-form-item>
       <el-form-item
-        :rules="[
-          { required: true, message: '不能为空'},
-          { type: 'number', message: '必须为数字值'}
-        ]"
         label="房间面积"
         prop="area"
       >
-        <el-input v-model.number="form1.area" type="number" placeholder="单位：m²"/>
+        <el-input v-model.number="form1.area"  placeholder="单位：m²"/>
       </el-form-item>
       <el-form-item
         :rules="[
@@ -69,7 +65,7 @@
         label="床大小"
         prop="bedSize"
       >
-        <el-input v-model.number="form1.bedSize" placeholder="例如：1.2m*1.5m"/>
+        <el-input v-model="form1.bedSize" placeholder="例如：1.2m*1.5m"/>
       </el-form-item>
 
       <el-form-item
@@ -77,10 +73,11 @@
           { required: true, message: '不能为空'},
           { type: 'number', message: '必须为数字值'}
         ]"
-        label="房间数量"
+        label="剩余房间数量"
         prop="rest"
       >
-        <el-input v-model.number="form1.rest" type="number" />
+        <el-input v-model.number="form1.rest" min="0" @blur="form1.rest<0?form1.rest=0:''" type="number" />
+        <div id="d"></div>
       </el-form-item>
 
 
@@ -153,7 +150,7 @@ export default {
     },
     onCancel() {
       this.$router.back()
-    }
+    },
   }
 }
 </script>

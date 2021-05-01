@@ -86,6 +86,7 @@
       </el-form>
       <div v-if="isOrderShown && order!=null">
         订单号：{{ order.orderId }}<br>
+        房间号：{{order.roomNumber}}<br>
         预订方式： {{ order.orderType }}<br>
         预订房型： {{ order.roomType }}<br>
         预订日期： {{ order.orderDate | formatDay }}<br>
@@ -112,6 +113,7 @@
       </el-form>
       <div v-if="isOrderShown && order!=null">
         订单号：{{ order.orderId }}<br>
+        房间号：{{ order.roomNumber }}<br>
         预订方式： {{ order.orderType }}<br>
         预订房型： {{ order.roomType }}<br>
         预订日期： {{ order.orderDate | formatDay }}<br>
@@ -307,13 +309,11 @@
       orderUpdateStatus(i) {
         this.dialogFormVisible = false
         this.dialogFormVisible1 = false
-        this.order = null
         this.isOrderShown = false
-        this.form.name=''
-        this.form.phone=''
-        this.form1.name=''
-        this.form1.phone=''
-        updateStatus(this.form, i).then((res) => {
+        if(i==2){
+          this.form1=this.form;
+        }
+        updateStatus(this.form1, i).then((res) => {
           if (res.code === 1000) {
             if (i == 2) {
               this.$message({

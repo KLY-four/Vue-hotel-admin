@@ -20,7 +20,7 @@
         label="房间类型">
         <el-select v-model="form1.typeId" :change="idToType(form1.typeId)" placeholder="请选择房间类型">
           <el-option v-for="t in typeList" :label="t.roomType" :value="t.typeId" :key="t.typeId">
-            {{ t.typeId + ' ' + t.roomType + '(' + t.price + '元)' }}
+            {{t.roomType + '(' + t.price + '元)' }}
           </el-option>
         </el-select>
       </el-form-item>
@@ -58,7 +58,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="详细描述">
-        <el-input v-model="form1.remark" type="textarea"/>
+        <el-input v-model="form1.remark"  type="textarea"/>
       </el-form-item>
       <el-form-item>
         <el-button :loading="loading" type="primary" @click="onSubmit()">提交</el-button>

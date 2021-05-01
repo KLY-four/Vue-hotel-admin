@@ -20,7 +20,7 @@
         label="手机号"
         prop="phone"
       >
-        <el-input v-model="form1.phone" placeholder="请输入预留手机号"/>
+        <el-input v-model="form1.phone" type="number" placeholder="请输入预留手机号"/>
       </el-form-item>
       <el-form-item
         :rules="[
